@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
     kapt("groupId:artifactId:version")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -43,4 +44,7 @@ dependencies {
     api("androidx.room:room-runtime:2.6.0")
     kapt("androidx.room:room-compiler:2.6.0")
     api("androidx.room:room-ktx:2.6.0")
+
+    // Retrofit
+    api("com.squareup.retrofit2:retrofit:2.9.0")
 }

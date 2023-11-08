@@ -14,16 +14,16 @@ import retrofit2.http.*
 interface WordService {
     @GET("${WORDS}/${ALL}/{${LANGUAGE}}")
     suspend fun getAllWords(@Path(LANGUAGE) language: Int): Response<WordResponse>
-    @POST(WORDS)
-    suspend fun createWord(@Body request: WordRequest): Response<IntResponse>
-    @GET("${WORDS}/{${ID}}")
-    suspend fun getWord(@Path(ID) id: Int): Response<WordResponse>
-    @PUT("${WORDS}/{${ID}}")
-    suspend fun updateWord(
-        @Path(ID) id: Int,
-        @Body request: UpdateWordRequest
-    ): Response<IntResponse>
-
-    @DELETE("${WORDS}/{${ID}}")
-    suspend fun deleteWord(@Path(ID) id: Int): Response<IntResponse>
+//    @POST(WORDS)
+//    suspend fun createWord(@Body request: WordRequest): Response<IntResponse>
+//    @GET("${WORDS}/{${ID}}")
+//    suspend fun getWord(@Path(ID) id: Int): Response<WordResponse>
+//    @PUT("${WORDS}/{${ID}}")
+//    suspend fun updateWord(
+//        @Path(ID) id: Int,
+//        @Body request: UpdateWordRequest
+//    ): Response<IntResponse>
+//
+//    @DELETE("${WORDS}/{${ID}}")
+//    suspend fun deleteWord(@Path(ID) id: Int): Response<IntResponse>
 }

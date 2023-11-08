@@ -14,8 +14,8 @@ interface LanguageDao {
     @Query("SELECT * FROM languages WHERE id = :id")
     fun getLanguageWithFlagById(id: Int): Flow<LanguageWithFlag?>
 
-    @Query("SELECT * FROM languages ORDER BY languageName ASC")
-    fun getAllLanguagesWithFlags(): Flow<List<LanguageWithFlag>>
+    @Query("SELECT * FROM languages WHERE nativeId = :native ORDER BY languageName ASC")
+    fun getAllLanguagesWithFlags(native: String): Flow<List<LanguageWithFlag>>
 
     @Insert
     suspend fun addLanguage(language: LanguageEntity)

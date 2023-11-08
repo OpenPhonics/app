@@ -14,16 +14,16 @@ import retrofit2.http.*
 interface LanguageService {
     @GET("$LANGUAGES/$ALL/{$NATIVE}")
     suspend fun getAllLanguages(@Path(NATIVE) native: String): Response<LanguageResponse>
-    @POST(LANGUAGES)
-    suspend fun createLanguage(@Body request: LanguageRequest): Response<IntResponse>
-    @GET("${LANGUAGES}/{$ID}")
-    suspend fun getLanguage(@Path(ID) id: Int): Response<LanguageResponse>
-    @PUT("${LANGUAGES}/{$ID}")
-    suspend fun updateLanguage(
-        @Path(ID) id: Int,
-        @Body request: UpdateLanguageRequest
-    ): Response<IntResponse>
-
-    @DELETE("${LANGUAGES}/{$ID}")
-    suspend fun deleteLanguage(@Path(ID) id: Int): Response<IntResponse>
+//    @POST(LANGUAGES)
+//    suspend fun createLanguage(@Body request: LanguageRequest): Response<IntResponse>
+//    @GET("${LANGUAGES}/{$ID}")
+//    suspend fun getLanguage(@Path(ID) id: Int): Response<LanguageResponse>
+//    @PUT("${LANGUAGES}/{$ID}")
+//    suspend fun updateLanguage(
+//        @Path(ID) id: Int,
+//        @Body request: UpdateLanguageRequest
+//    ): Response<IntResponse>
+//
+//    @DELETE("${LANGUAGES}/{$ID}")
+//    suspend fun deleteLanguage(@Path(ID) id: Int): Response<IntResponse>
 }

@@ -3,11 +3,11 @@ package com.openphonics.data.local.entity
 import androidx.room.Embedded
 import androidx.room.Relation
 
-data class LanguageWithWords(
+data class LanguageWithFlag(
     @Embedded
-    val language: LanguageEntity,
+    val flag: FlagEntity,
     @Relation
         (parentColumn = "id",
-        entityColumn = "language")
-    val words: List<WordEntity>
+        entityColumn = "flag")
+    val language: LanguageEntity
 )

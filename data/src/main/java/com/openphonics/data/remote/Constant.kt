@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.openphonics.data
+package com.openphonics.data.remote
 
 object Constant {
     const val API_BASE_URL = "https://localhost:5432"

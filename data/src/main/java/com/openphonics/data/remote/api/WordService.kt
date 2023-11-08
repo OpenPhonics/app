@@ -1,10 +1,9 @@
 package com.openphonics.data.remote.api
 
-import com.openphonics.data.Constant
-import com.openphonics.data.Constant.ALL
-import com.openphonics.data.Constant.ID
-import com.openphonics.data.Constant.LANGUAGE
-import com.openphonics.data.Constant.WORDS
+import com.openphonics.data.remote.Constant.ALL
+import com.openphonics.data.remote.Constant.ID
+import com.openphonics.data.remote.Constant.LANGUAGE
+import com.openphonics.data.remote.Constant.WORDS
 import com.openphonics.data.remote.request.WordRequest
 import com.openphonics.data.remote.request.UpdateWordRequest
 import com.openphonics.data.remote.response.IntResponse

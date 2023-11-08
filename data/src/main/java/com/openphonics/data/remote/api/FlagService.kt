@@ -1,10 +1,9 @@
 package com.openphonics.data.remote.api
 
-import com.openphonics.data.Constant
 import com.openphonics.data.remote.response.*
 import com.openphonics.data.remote.request.*
-import com.openphonics.data.Constant.FLAGS
-import com.openphonics.data.Constant.ID
+import com.openphonics.data.remote.Constant.FLAGS
+import com.openphonics.data.remote.Constant.ID
 import retrofit2.Response
 import retrofit2.http.*
 

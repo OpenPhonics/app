@@ -14,7 +14,7 @@ import com.openphonics.data.local.entity.WordEntity
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class LocalRepository @Inject constructor(
+class OpenPhonicsLocalRepository @Inject constructor(
     private val languageDao: LanguageDao,
     private val wordDao: WordDao,
     private val flagDao: FlagDao

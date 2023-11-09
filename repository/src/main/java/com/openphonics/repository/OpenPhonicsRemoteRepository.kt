@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class RemoteRepository @Inject constructor(
+class OpenPhonicsRemoteRepository @Inject constructor(
     private val languageService: LanguageService,
     private val wordService: WordService
 ) : OpenPhonicsRepository {

@@ -1,10 +1,11 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt") version "1.9.20"
 }
 
 android {
-    namespace = "com.openphonics.core"
+    namespace = "com.openphonics.backend"
     compileSdk = 33
 
     defaultConfig {
@@ -30,14 +31,33 @@ android {
 }
 
 dependencies {
-    // Kotlin Stdlib
-    api("org.jetbrains.kotlin:kotlin-stdlib:1.9.20")
+    // Lifecycle
+    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    api("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    api("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
-    // Coroutines
-    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+    // WorkManager
+    implementation("androidx.work:work-runtime-ktx:2.8.1")
+    implementation("androidx.work:work-multiprocess:2.8.1")
 
-    // JavaX Inject
-    api("javax.inject:javax.inject:1")
+    // Dagger + Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+
+
+
+    // Moshi
+    api("com.squareup.moshi:moshi-kotlin:1.15.0")
+    api("com.squareup.moshi:moshi-adapters:1.15.0")
+
+    api("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    api("androidx.hilt:hilt-work:1.1.0")
+    kapt("androidx.hilt:hilt-compiler:1.1.0")
+
+    implementation(project(":core"))
+    implementation(project(":repository"))
+    implementation(project(":data"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -45,8 +65,4 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-    // Moshi
-    api("com.squareup.moshi:moshi-kotlin:1.15.0")
-    api("com.squareup.moshi:moshi-adapters:1.15.0")
 }

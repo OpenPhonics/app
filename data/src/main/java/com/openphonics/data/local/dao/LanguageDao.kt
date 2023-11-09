@@ -17,8 +17,8 @@ interface LanguageDao {
     @Query("SELECT * FROM languages WHERE nativeId = :native ORDER BY languageName ASC")
     fun getAllLanguagesWithFlags(native: String): Flow<List<LanguageWithFlag>>
 
-    @Insert
-    suspend fun addLanguage(language: LanguageEntity)
+//    @Insert
+//    suspend fun addLanguage(language: LanguageEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addLanguages(languages: List<LanguageEntity>)
@@ -29,8 +29,8 @@ interface LanguageDao {
     @Query("DELETE FROM languages WHERE id = :id")
     suspend fun deleteLanguageById(id: Int)
 
-    @Query("DELETE FROM languages")
-    suspend fun deleteAllLanguages()
+//    @Query("DELETE FROM languages")
+//    suspend fun deleteAllLanguages()
 
 //    @Query("UPDATE languages SET id = :newLanguageId WHERE id = :oldLanguageId")
 //    fun updateLanguageId(oldLanguageId: Int, newLanguageId: Int)

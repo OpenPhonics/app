@@ -8,8 +8,8 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface FlagService {
-    @GET(FLAGS)
-    suspend fun getAllFlags(): Response<FlagResponse>
+//    @GET(FLAGS)
+//    suspend fun getAllFlags(): Response<FlagResponse>
 //    @POST(FLAGS)
 //    suspend fun createFlag(@Body request: FlagRequest): Response<StrResponse>
 //    @GET("$FLAGS/{$ID}")

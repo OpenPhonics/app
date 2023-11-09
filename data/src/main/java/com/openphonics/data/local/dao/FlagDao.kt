@@ -14,8 +14,8 @@ interface FlagDao {
 //    @Query("SELECT * FROM flags ORDER BY id ASC")
 //    fun getAllFlags(): Flow<List<FlagEntity>>
 
-    @Insert
-    suspend fun addFlag(flag: FlagEntity)
+//    @Insert
+//    suspend fun addFlag(flag: FlagEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFlags(flags: List<FlagEntity>)
@@ -26,8 +26,8 @@ interface FlagDao {
 //    @Query("DELETE FROM flags WHERE id = :id")
 //    suspend fun deleteFlagById(id: String)
 
-    @Query("DELETE FROM flags")
-    suspend fun deleteAllFlags()
+//    @Query("DELETE FROM flags")
+//    suspend fun deleteAllFlags()
 
 //    @Query("UPDATE flags SET id = :newFlagId WHERE id = :oldFlagId")
 //    fun updateFlagId(oldFlagId: String, newFlagId: String)

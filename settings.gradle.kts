@@ -21,4 +21,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "app"
 include(":app")
- 
+include(":core:database")
+include(":core:network")
+include(":core:datastore")
+include(":core:data")
+include(":core:common")
+include(":feature:login")
+include(":feature:signup")
+include(":core:design")

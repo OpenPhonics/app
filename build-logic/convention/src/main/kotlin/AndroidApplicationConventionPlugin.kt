@@ -37,7 +37,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 defaultConfig.versionName = ProjectConfig.VERSION_NAME
                 defaultConfig.versionCode = ProjectConfig.VERSION_CODE
             }
-
         }
     }
 }

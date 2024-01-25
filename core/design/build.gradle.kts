@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.openphonics.android.library)
+    alias(libs.plugins.openphonics.android.library.compose)
 }
 
 android {
@@ -7,11 +7,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.bundles.compose)
+    implementation(libs.compose.icons)
+    testImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.android.test)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    debugImplementation(libs.bundles.compose.debug)
 }

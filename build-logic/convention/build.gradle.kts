@@ -18,8 +18,7 @@ tasks.withType<KotlinCompile>().configureEach {
     }
 }
 dependencies {
-    compileOnly(libs.android.gradlePlugin)
-    compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.bundles.conventionPlugins)
 }
 tasks {
     validatePlugins {
@@ -27,6 +26,7 @@ tasks {
         failOnWarning = true
     }
 }
+
 
 gradlePlugin {
     plugins {
@@ -37,6 +37,10 @@ gradlePlugin {
         register("androidLibrary") {
             id = "openphonics.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
+        }
+        register("androidLibraryCompose"){
+            id = "openphonics.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
         register("androidHilt") {
             id = "openphonics.android.hilt"

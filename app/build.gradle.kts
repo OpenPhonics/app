@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.openphonics.android.application)
-    alias(libs.plugins.openphonics.android.hilt)
 }
 
 android {
@@ -21,13 +20,20 @@ android {
     }
 }
 
+
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    implementation(projects.core.design)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(projects.feature.home)
+
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.bundles.compose)
+    implementation(libs.bundles.navigation)
+
+    testImplementation(libs.bundles.test)
+    androidTestImplementation(libs.bundles.android.test)
+
+    debugImplementation(libs.bundles.compose.debug)
 }

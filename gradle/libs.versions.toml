@@ -2,54 +2,64 @@
 agp = "8.2.1"
 kotlin = "1.9.20"
 ksp = "1.9.20-1.0.13"
-coreKtx = "1.12.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
-appcompat = "1.6.1"
-material = "1.11.0"
-compose = "1.5.4"
-composeMaterial3 = "1.1.2"
-composeBom = "2023.03.00"
-composeFoundation = "1.4.1"
+composeVersion = "1.5.4"
 hilt = "2.50"
+hiltNavigation = "1.0.0"
+navigation = "2.7.4"
+composeBom = "2023.10.01"
+splashscreen = "1.0.1"
+
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+#TESTING
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+#LIFECYCLE
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+#ACTIVITY
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+#COMPOSE
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+compose-material3 = { group = "androidx.compose.material3", name = "material3"}
+compose-ui = { group = "androidx.compose.ui", name = "ui"}
+compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview"}
+compose-runtime = { group = "androidx.compose.runtime", name = "runtime"}
+compose-foundation = { group="androidx.compose.foundation", name="foundation"}
+compose-window = { group = "androidx.compose.material3", name = "material3-window-size-class"}
+compose-icons = {group="androidx.compose.material", name="material" }
+#COMPOSE ANDROID TEST
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-
-#COMPOSE
-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeMaterial3" }
-compose-ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "compose" }
-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "compose" }
-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "compose" }
-compose-foundation = { group="androidx.compose.foundation", name="foundation", version.ref="composeFoundation"}
-#COMPOSE ANDROID TEST
-compose-bom = { group = "androidx.compose", name="compose-bom", version.ref= "composeBom"}
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 #COMPOSE DEBUG
-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "compose" }
-androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling"}
+compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 #HILT
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+#NAVIGATION
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
+#SPLASH
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 
-
+#PLUGINS
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
-
+[bundles]
+test = ["junit"]
+android-test = ["androidx-junit", "androidx-espresso-core", "androidx-ui-test-junit4"]
+navigation = ["androidx-navigation-compose", "androidx-hilt-navigation-compose"]
+compose = ["compose-material3", "compose-ui","compose-ui-graphics", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-runtime", "compose-foundation", "compose-window" ]
+conventionPlugins = ["android-gradlePlugin", "kotlin-gradlePlugin"]
+compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -59,6 +69,8 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 openphonics-android-application = { id = "openphonics.android.application", version = "unspecified" }
 openphonics-android-library = { id = "openphonics.android.library", version = "unspecified"}
+openphonics-android-library-compose = { id = "openphonics.android.library.compose", version = "unspecified"}
+
 openphonics-android-hilt = { id = "openphonics.android.hilt", version = "unspecified"}
 
 

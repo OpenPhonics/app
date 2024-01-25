@@ -1,48 +1,88 @@
 package com.advaitvedant.openphonics
 
+import android.animation.ObjectAnimator
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import android.view.animation.OvershootInterpolator
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.advaitvedant.openphonics.ui.theme.OpenphonicsTheme
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.DisposableEffect
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.advaitvedant.design.theme.OpTheme
+import com.advaitvedant.openphonics.ui.OpApp
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen().exitAnimation()
+        enableEdgeToEdge()
         setContent {
-            OpenphonicsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+            edgeSettings()
+            CompositionLocalProvider() {
+                OpTheme {
+                    OpApp(
+                        windowSizeClass = calculateWindowSizeClass(this)
+                    )
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
+private val lightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
 
-@Preview(showBackground = true)
+fun SplashScreen.exitAnimation(){
+    setOnExitAnimationListener { screen ->
+        val zoomX = ObjectAnimator.ofFloat(
+            screen.iconView,
+            View.SCALE_X,
+            0.4f,
+            0.0f
+        )
+        zoomX.interpolator = OvershootInterpolator()
+        zoomX.duration = 500L
+        zoomX.doOnEnd { screen.remove() }
+
+        val zoomY = ObjectAnimator.ofFloat(
+            screen.iconView,
+            View.SCALE_Y,
+            0.4f,
+            0.0f
+        )
+        zoomY.interpolator = OvershootInterpolator()
+        zoomY.duration = 500L
+        zoomY.doOnEnd { screen.remove() }
+
+        zoomX.start()
+        zoomY.start()
+    }
+}
 @Composable
-fun GreetingPreview() {
-    OpenphonicsTheme {
-        Greeting("Android")
+fun ComponentActivity.edgeSettings(darkTheme: Boolean = isSystemInDarkTheme()){
+    DisposableEffect(darkTheme) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
+            ) { darkTheme },
+            navigationBarStyle = SystemBarStyle.auto(
+                lightScrim,
+                darkScrim,
+            ) { darkTheme },
+        )
+        onDispose {}
     }
 }

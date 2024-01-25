@@ -1,9 +1,13 @@
 package com.advaitvedant.openphonics.config
 import com.advaitvedant.openphonics.ProjectConfig
+import com.advaitvedant.openphonics.lib
+import com.advaitvedant.openphonics.testImplementation
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 
-internal fun configureAndroidLibrary(
+internal fun Project.configureAndroidLibrary(
     commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.apply {
@@ -15,6 +19,9 @@ internal fun configureAndroidLibrary(
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
+        }
+        dependencies {
+            testImplementation(lib("junit"))
         }
     }
 }

@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+option java_package = "com.advaitvedant.datastore";
+option java_multiple_files = true;
+message AppPreferences {
+  int32 skillChangeListVersion = 1;
+}

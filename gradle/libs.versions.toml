@@ -1,25 +1,51 @@
 [versions]
-agp = "8.2.1"
-kotlin = "1.9.20"
-ksp = "1.9.20-1.0.13"
+agp = "8.2.0"
+kotlin = "1.9.0"
+ksp = "1.9.0-1.0.13"
+hilt = "2.48.1"
+hiltNavigation = "1.0.0"
+hiltExt = "1.1.0"
+datastore = "1.0.0"
+protobuf = "3.24.4"
+protobuf-plugin = "0.9.4"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
-activityCompose = "1.8.2"
-composeVersion = "1.5.4"
-hilt = "2.50"
-hiltNavigation = "1.0.0"
+activityCompose = "1.8.0"
+composeVersion = "1.5.1"
+retrofit = "2.9.0"
 navigation = "2.7.4"
 composeBom = "2023.10.01"
 splashscreen = "1.0.1"
+coreKtx = "1.12.0"
+appcompat = "1.6.1"
+material = "1.11.0"
+securityCryptoVersion = '1.1.0-alpha06'
+androidxLifecycle = "2.6.2"
+coroutineTest = "1.8.0-RC2"
+junitKtx = "1.1.5"
+monitor = "1.6.1"
+workRuntimeKtx = "2.9.0-rc01"
+kotlinxCoroutines = "1.7.3"
+room = "2.6.1"
+
+
+
+
+
 
 
 [libraries]
 #TESTING
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+coroutine-tests = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutineTest" }
+
 #LIFECYCLE
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycle" }
+lifecycle-viewModel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+
 #ACTIVITY
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 #COMPOSE
@@ -33,13 +59,21 @@ compose-foundation = { group="androidx.compose.foundation", name="foundation"}
 compose-window = { group = "androidx.compose.material3", name = "material3-window-size-class"}
 compose-icons = {group="androidx.compose.material", name="material" }
 #COMPOSE ANDROID TEST
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+#androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 #COMPOSE DEBUG
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling"}
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+#WORK
+androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
+hilt-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt"}
+#ROOM
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 #HILT
+hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
@@ -48,30 +82,53 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltNavigation" }
 #SPLASH
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
+#RETROFIT
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit"  }
+converter_moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+#DATASTORE-PROTOBUFF
+datastore = { group = "androidx.datastore", name="datastore", version.ref = "datastore" }
+protobuf = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
+protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+
+#SECURITY
+security = { group = "androidx.security", name = "security-crypto", version.ref = "securityCryptoVersion" }
 
 #PLUGINS
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
 
 [bundles]
-test = ["junit"]
-android-test = ["androidx-junit", "androidx-espresso-core", "androidx-ui-test-junit4"]
+test = ["junit", "coroutine-tests"]
+android-test = ["androidx-junit", "androidx-espresso-core", "coroutine-tests"]
 navigation = ["androidx-navigation-compose", "androidx-hilt-navigation-compose"]
 compose = ["compose-material3", "compose-ui","compose-ui-graphics", "compose-ui-tooling", "compose-ui-tooling-preview", "compose-runtime", "compose-foundation", "compose-window" ]
 conventionPlugins = ["android-gradlePlugin", "kotlin-gradlePlugin"]
-compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
+composeDebug = ["compose-ui-tooling", "compose-ui-test-manifest"]
+retrofit = ["retrofit", "converter_moshi"]
+datastore = ["datastore", "protobuf", "kotlinx-coroutines-android", "protobuf-protoc"]
+work = ["hilt-work","androidx-work-runtime-ktx"]
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 openphonics-android-application = { id = "openphonics.android.application", version = "unspecified" }
 openphonics-android-library = { id = "openphonics.android.library", version = "unspecified"}
 openphonics-android-library-compose = { id = "openphonics.android.library.compose", version = "unspecified"}
-
 openphonics-android-hilt = { id = "openphonics.android.hilt", version = "unspecified"}
+openphonics-android-datastore = { id = "openphonics.android.datastore", version = "unspecified"}
+openphonics-android-feature = { id = "openphonics.android.feature", version = "unspecified"}
+
 
 
 

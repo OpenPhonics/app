@@ -116,7 +116,7 @@ fun OpLoadingWheel(
 }
 
 @Composable
-fun NiaOverlayLoadingWheel(
+fun OpOverlayLoadingWheel(
     contentDesc: String,
     modifier: Modifier = Modifier,
 ) {

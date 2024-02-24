@@ -13,29 +13,31 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.advaitvedant.data.utils.NetworkMonitor
 import com.advaitvedant.design.theme.OpTheme
 import com.advaitvedant.openphonics.ui.OpApp
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
+    @Inject
+    lateinit var networkMonitor: NetworkMonitor
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        installSplashScreen().exitAnimation()
+        installSplashScreen().apply { exitAnimation() }
         enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
         setContent {
-            edgeSettings()
-            CompositionLocalProvider() {
-                OpTheme {
-                    OpApp(
-                        windowSizeClass = calculateWindowSizeClass(this)
-                    )
-                }
+            EdgeSettings()
+            OpTheme {
+                OpApp(
+                    windowSizeClass = calculateWindowSizeClass(this)
+                )
             }
         }
     }
@@ -71,7 +73,7 @@ fun SplashScreen.exitAnimation(){
     }
 }
 @Composable
-fun ComponentActivity.edgeSettings(darkTheme: Boolean = isSystemInDarkTheme()){
+fun ComponentActivity.EdgeSettings(darkTheme: Boolean = isSystemInDarkTheme()){
     DisposableEffect(darkTheme) {
         enableEdgeToEdge(
             statusBarStyle = SystemBarStyle.auto(

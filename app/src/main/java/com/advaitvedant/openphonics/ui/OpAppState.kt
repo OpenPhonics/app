@@ -12,27 +12,36 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import com.advaitvedant.data.repository.AuthRepository
+import com.advaitvedant.data.utils.NetworkMonitor
 import com.advaitvedant.home.homeRoute
 import com.advaitvedant.home.navigateToHome
 import com.advaitvedant.openphonics.navigation.TopLevelDestination
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 
 @Composable
 fun rememberOpAppState(
     windowSizeClass: WindowSizeClass,
+    networkMonitor: NetworkMonitor,
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
+
 ): OpAppState {
     return remember(
         navController,
-        coroutineScope,
         windowSizeClass,
+        networkMonitor,
+        coroutineScope
     ) {
         OpAppState(
             navController,
-            coroutineScope,
-            windowSizeClass
+            windowSizeClass,
+            networkMonitor,
+            coroutineScope
         )
     }
 }
@@ -40,9 +49,19 @@ fun rememberOpAppState(
 @Stable
 class OpAppState(
     val navController: NavHostController,
-    val coroutineScope: CoroutineScope,
-    val windowSizeClass: WindowSizeClass
+    val windowSizeClass: WindowSizeClass,
+    networkMonitor: NetworkMonitor,
+    coroutineScope: CoroutineScope,
 ) {
+
+    val isOffline = networkMonitor.isOnline
+        .map(Boolean::not)
+        .stateIn(
+            scope = coroutineScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = false,
+        )
+
     val currentDestination: NavDestination?
         @Composable get() = navController
             .currentBackStackEntryAsState().value?.destination
@@ -54,10 +73,12 @@ class OpAppState(
         }
 
     val shouldShowBottomBar: Boolean
-        get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact
+        @Composable
+        get() = windowSizeClass.widthSizeClass == WindowWidthSizeClass.Compact && currentTopLevelDestination != null
 
     val shouldShowNavRail: Boolean
-        get() = !shouldShowBottomBar
+        @Composable
+        get() = !shouldShowBottomBar && currentTopLevelDestination != null
 
     val topLevelDestinations: List<TopLevelDestination> = TopLevelDestination.values().asList()
 

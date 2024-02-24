@@ -15,6 +15,7 @@
  */
 
 import com.advaitvedant.openphonics.ProjectConfig
+import com.advaitvedant.openphonics.config.configureFlavors
 import com.advaitvedant.openphonics.config.configureAndroidApplication
 import com.advaitvedant.openphonics.config.configureAndroidCompose
 import com.android.build.api.dsl.ApplicationExtension
@@ -32,6 +33,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.configure<ApplicationExtension> {
                 configureAndroidApplication(this)
                 configureAndroidCompose(this)
+                configureFlavors(this)
                 defaultConfig.applicationId = ProjectConfig.APPLICATION_ID
                 defaultConfig.targetSdk = ProjectConfig.TARGET_SDK
                 defaultConfig.versionName = ProjectConfig.VERSION_NAME

@@ -5,7 +5,13 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import com.advaitvedant.home.homeRoute
 import com.advaitvedant.home.homeScreen
+import com.advaitvedant.home.navigateToHome
+import com.advaitvedant.login.loginScreen
+import com.advaitvedant.login.navigateToLogin
 import com.advaitvedant.openphonics.ui.OpAppState
+import com.advaitvedant.skill.navigateToSkill
+import com.advaitvedant.skill.skillScreen
+import kotlinx.coroutines.flow.first
 
 @Composable
 fun OpNavHost(
@@ -19,6 +25,9 @@ fun OpNavHost(
         startDestination = startDestination,
         modifier = modifier,
     ) {
-        homeScreen()
+
+        skillScreen(navController::navigateToHome)
+        homeScreen(navController::navigateToLogin,  navController::navigateToSkill)
+        loginScreen(navController::navigateToHome, navController::navigateToHome)
     }
 }

@@ -13,4 +13,5 @@ fun Project.bundle(bundle: String) = libs.findBundle(bundle).get()
 
 
 
+
 fun Project.version(version: String): String = libs.findVersion(version).get().toString()

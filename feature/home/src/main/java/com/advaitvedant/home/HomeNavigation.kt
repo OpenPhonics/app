@@ -1,6 +1,5 @@
 package com.advaitvedant.home
 
-import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -13,13 +12,12 @@ fun NavController.navigateToHome(navOptions: NavOptions? = null) {
     this.navigate(homeRoute, navOptions)
 }
 
-fun NavGraphBuilder.homeScreen() {
+fun NavGraphBuilder.homeScreen(onNavigateToLogin: ()->Unit, onNavigateToSkill: (Int)->Unit) {
     composable(route = homeRoute) {
-        HomeRoute()
+        HomeRoute(
+            onNavigateToLogin = onNavigateToLogin,
+            onNavigateToSkill = onNavigateToSkill
+        )
     }
 }
 
-@Composable
-fun HomeRoute(){
-
-}

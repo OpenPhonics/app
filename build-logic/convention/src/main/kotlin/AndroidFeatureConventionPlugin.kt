@@ -1,0 +1,58 @@
+/*
+ * Copyright 2022 The Android Open Source Project
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       https://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
+import com.advaitvedant.openphonics.bundle
+import com.advaitvedant.openphonics.config.configureAndroidCompose
+import com.advaitvedant.openphonics.config.configureAndroidLibrary
+import com.advaitvedant.openphonics.implementation
+import com.advaitvedant.openphonics.ksp
+import com.advaitvedant.openphonics.lib
+import com.android.build.gradle.LibraryExtension
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.dependencies
+import com.advaitvedant.openphonics.config.configureFlavors
+
+class AndroidFeatureConventionPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        with(target) {
+            with(pluginManager) {
+                apply("com.android.library")
+                apply("org.jetbrains.kotlin.android")
+                apply("com.google.devtools.ksp")
+                apply("dagger.hilt.android.plugin")
+            }
+            extensions.configure<LibraryExtension> {
+                configureAndroidLibrary(this)
+                configureAndroidCompose(this)
+                configureFlavors(this)
+            }
+            dependencies {
+                implementation(bundle("compose"))
+                implementation(bundle("navigation"))
+                implementation(lib("hilt-android"))
+                ksp(lib("hilt-compiler"))
+
+//                implementation(project(":core:model"))
+                implementation(project(":core:design"))
+                implementation(project(":core:data"))
+                implementation(lib("lifecycle-runtime-compose"))
+                implementation(lib("lifecycle-viewModel-compose"))
+            }
+        }
+    }
+}

@@ -46,5 +46,13 @@ gradlePlugin {
             id = "openphonics.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("androidDatastore"){
+            id = "openphonics.android.datastore"
+            implementationClass = "AndroidDatastoreConventionPlugin"
+        }
+        register("androidFeature"){
+            id = "openphonics.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
     }
 }

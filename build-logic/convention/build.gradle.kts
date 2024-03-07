@@ -4,7 +4,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.advaitvedant.buildlogic"
+group = "com.advaitvedant.openphonics.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -25,5 +25,14 @@ tasks {
     validatePlugins {
         enableStricterValidation = true
         failOnWarning = true
+    }
+}
+
+gradlePlugin {
+    plugins {
+        register("androidApplication") {
+            id = "openphonics.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
     }
 }

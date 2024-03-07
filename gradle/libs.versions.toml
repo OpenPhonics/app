@@ -8,9 +8,11 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
+composeVersion = "1.5.10"
 composeBom = "2024.02.01"
 appcompat = "1.6.1"
 material = "1.11.0"
+
 
 
 [libraries]
@@ -42,3 +44,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
+openphonics-android-application = { id = "openphonics.android.application", version = "unspecified" }

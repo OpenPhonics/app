@@ -11,13 +11,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.advaitvedant.bookmarks.bookmarksRoute
+import com.advaitvedant.bookmarks.BOOKMARKS_ROUTE
 import com.advaitvedant.bookmarks.navigateToBookmarks
-import com.advaitvedant.explore.exploreRoute
+import com.advaitvedant.explore.EXPLORE_ROUTE
 import com.advaitvedant.explore.navigateToExplore
-import com.advaitvedant.home.homeRoute
+import com.advaitvedant.home.HOME_ROUTE
 import com.advaitvedant.home.navigateToHome
 import com.advaitvedant.openphonics.navigation.TopLevelDestination
+import com.advaitvedant.settings.navigateToSettings
+import com.advaitvedant.settings.settingsRoute
 
 @Composable
 fun rememberOpAppState(
@@ -48,9 +50,10 @@ class OpAppState(
 
     val currentTopLevelDestination: TopLevelDestination?
         @Composable get() = when (currentDestination?.route) {
-            homeRoute -> TopLevelDestination.HOME
-            exploreRoute -> TopLevelDestination.EXPLORE
-            bookmarksRoute -> TopLevelDestination.BOOKMARKS
+            HOME_ROUTE -> TopLevelDestination.HOME
+            EXPLORE_ROUTE -> TopLevelDestination.EXPLORE
+            BOOKMARKS_ROUTE -> TopLevelDestination.BOOKMARKS
+            settingsRoute -> TopLevelDestination.SETTINGS
             else -> null
         }
 
@@ -74,9 +77,10 @@ class OpAppState(
         }
 
         when (topLevelDestination) {
-             TopLevelDestination.HOME -> navController.navigateToHome(topLevelNavOptions)
+            TopLevelDestination.HOME -> navController.navigateToHome(topLevelNavOptions)
             TopLevelDestination.EXPLORE -> navController.navigateToExplore(topLevelNavOptions)
             TopLevelDestination.BOOKMARKS -> navController.navigateToBookmarks(topLevelNavOptions)
+            TopLevelDestination.SETTINGS -> navController.navigateToSettings(topLevelNavOptions)
         }
     }
 }

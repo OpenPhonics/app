@@ -10,14 +10,14 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 
-const val exploreRoute = "explore_route"
+const val EXPLORE_ROUTE = "explore_route"
 
 fun NavController.navigateToExplore(navOptions: NavOptions? = null) {
-    this.navigate(exploreRoute, navOptions)
+    this.navigate(EXPLORE_ROUTE, navOptions)
 }
 
 fun NavGraphBuilder.exploreScreen() {
-    composable(route = exploreRoute) {
+    composable(route = EXPLORE_ROUTE) {
         Box(modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center){
             Text("Explore")

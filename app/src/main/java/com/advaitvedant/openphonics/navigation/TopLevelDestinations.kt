@@ -19,6 +19,10 @@ enum class TopLevelDestination(
     BOOKMARKS(
         icon = OpIcons.Bookmark,
         text = R.string.bookmarks
+    ),
+    SETTINGS(
+        icon = OpIcons.Settings,
+        text = R.string.settings
     )
     
 }

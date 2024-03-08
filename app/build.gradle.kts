@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.openphonics.android.application)
+    alias(libs.plugins.openphonics.android.hilt)
 }
 
 android {
@@ -17,6 +18,10 @@ dependencies {
     implementation(projects.feature.home)
     implementation(projects.feature.explore)
     implementation(projects.feature.bookmarks)
+    implementation(projects.feature.login)
+    implementation(projects.feature.signup)
+    implementation(projects.feature.settings)
+    implementation(projects.feature.lesson)
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)

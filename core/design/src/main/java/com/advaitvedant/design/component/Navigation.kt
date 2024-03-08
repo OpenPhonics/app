@@ -20,7 +20,6 @@ fun RowScope.OpNavigationBarItem(
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    selectedIcon: @Composable () -> Unit = icon,
     enabled: Boolean = true,
     label: @Composable (() -> Unit)? = null,
     alwaysShowLabel: Boolean = true,
@@ -28,7 +27,7 @@ fun RowScope.OpNavigationBarItem(
     NavigationBarItem(
         selected = selected,
         onClick = onClick,
-        icon = if (selected) selectedIcon else icon,
+        icon = icon,
         modifier = modifier,
         enabled = enabled,
         label = label,
@@ -61,7 +60,6 @@ fun OpNavigationRailItem(
     onClick: () -> Unit,
     icon: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    selectedIcon: @Composable () -> Unit = icon,
     enabled: Boolean = true,
     label: @Composable (() -> Unit)? = null,
     alwaysShowLabel: Boolean = true,
@@ -69,7 +67,7 @@ fun OpNavigationRailItem(
     NavigationRailItem(
         selected = selected,
         onClick = onClick,
-        icon = if (selected) selectedIcon else icon,
+        icon = icon,
         modifier = modifier,
         enabled = enabled,
         label = label,

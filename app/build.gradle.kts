@@ -12,7 +12,15 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.design)
+
+    implementation(projects.feature.home)
+    implementation(projects.feature.explore)
+    implementation(projects.feature.bookmarks)
+
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)
-    debugImplementation(libs.androidx.ui.tooling)
+
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.bundles.compose)
 }

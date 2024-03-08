@@ -103,17 +103,11 @@ private fun OpNavRail(
                 onClick = { onNavigateToDestination(destination) },
                 icon = {
                     Icon(
-                        imageVector = destination.unselectedIcon,
+                        imageVector = destination.icon,
                         contentDescription = null,
                     )
                 },
-                selectedIcon = {
-                    Icon(
-                        imageVector = destination.selectedIcon,
-                        contentDescription = null,
-                    )
-                },
-                label = { Text(stringResource(destination.iconTextId)) }
+                label = { Text(stringResource(destination.text)) }
             )
         }
     }
@@ -136,17 +130,11 @@ private fun OpBottomBar(
                 onClick = { onNavigateToDestination(destination) },
                 icon = {
                     Icon(
-                        imageVector = destination.unselectedIcon,
+                        imageVector = destination.icon,
                         contentDescription = null,
                     )
                 },
-                selectedIcon = {
-                    Icon(
-                        imageVector = destination.selectedIcon,
-                        contentDescription = null,
-                    )
-                },
-                label = { Text(stringResource(destination.iconTextId)) }
+                label = { Text(stringResource(destination.text)) }
             )
         }
     }

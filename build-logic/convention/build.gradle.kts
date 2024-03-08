@@ -42,5 +42,14 @@ gradlePlugin {
             id = "openphonics.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
+        register("androidHilt") {
+            id = "openphonics.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
+
+        register("androidFeature"){
+            id = "openphonics.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
     }
 }

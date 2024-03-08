@@ -1,4 +1,4 @@
-package com.advaitvedant.design
+package com.advaitvedant.design.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

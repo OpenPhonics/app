@@ -12,7 +12,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.design)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)
-    debugImplementation(libs.androidx.ui.tooling)
 }

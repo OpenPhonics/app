@@ -1,33 +1,45 @@
 package com.advaitvedant.openphonics
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.DisposableEffect
+import com.advaitvedant.design.OpTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                Greeting("Android")
+            EdgeSettings()
+            OpTheme {
+
             }
         }
     }
 }
+private val lightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+private val darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
+
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun ComponentActivity.EdgeSettings(darkTheme: Boolean = isSystemInDarkTheme()){
+    DisposableEffect(darkTheme) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(
+                Color.TRANSPARENT,
+                Color.TRANSPARENT,
+            ) { darkTheme },
+            navigationBarStyle = SystemBarStyle.auto(
+                lightScrim,
+                darkScrim,
+            ) { darkTheme },
+        )
+        onDispose {}
+    }
 }

@@ -18,6 +18,7 @@ navigation = "2.7.4"
 hiltNavigation = "1.0.0"
 hiltExt = "1.1.0"
 androidxLifecycle = "2.6.2"
+jetbrainsKotlinJvm = "1.9.0"
 
 
 
@@ -79,3 +80,4 @@ openphonics-android-library = { id = "openphonics.android.library", version = "u
 openphonics-android-library-compose = { id = "openphonics.android.library.compose", version = "unspecified"}
 openphonics-android-hilt = { id = "openphonics.android.hilt", version = "unspecified"}
 openphonics-android-feature = { id = "openphonics.android.feature", version = "unspecified"}
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }

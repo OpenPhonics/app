@@ -5,6 +5,7 @@ data class Lesson(
     val num: Int,
     val phonetic: String,
     val state: LessonState,
+    val progress: Float? = 0f
 )
 
 

@@ -24,7 +24,7 @@ splashscreen = "1.0.1"
 uiTooling = "1.6.3"
 protobufPlugin = "0.9.4"
 protobuf = "3.25.2"
-
+androidxDataStore = "1.0.0"
 
 
 
@@ -48,6 +48,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 #splash
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
 #proto
+androidx-dataStore-core = { group = "androidx.datastore", name = "datastore", version.ref = "androidxDataStore" }
 protobuf-protoc = { group = "com.google.protobuf", name = "protoc", version.ref = "protobuf" }
 protobuf-kotlin-lite = { group = "com.google.protobuf", name = "protobuf-kotlin-lite", version.ref = "protobuf" }
 #security

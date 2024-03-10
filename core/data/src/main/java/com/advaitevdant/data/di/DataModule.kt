@@ -4,6 +4,8 @@ import com.advaitevdant.data.repository.AuthRepository
 import com.advaitevdant.data.repository.AuthRepositoryImpl
 import com.advaitevdant.data.repository.DataRepository
 import com.advaitevdant.data.repository.DataRepositoryImpl
+import com.advaitevdant.data.repository.UserDataRepository
+import com.advaitevdant.data.repository.UserDataRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +23,9 @@ internal interface DataModule {
     fun bindsData(
         data: DataRepositoryImpl
     ) : DataRepository
+
+    @Binds
+    fun bindsUserData(
+        userData: UserDataRepositoryImpl
+    ) : UserDataRepository
 }

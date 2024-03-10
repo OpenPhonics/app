@@ -15,6 +15,7 @@ android {
 dependencies {
     implementation(projects.core.design)
     implementation(projects.core.data)
+    implementation(projects.core.model)
 
     implementation(projects.feature.home)
     implementation(projects.feature.explore)

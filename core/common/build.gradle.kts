@@ -4,11 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "com.advaitevdant.data"
+    namespace = "com.advaitvedant.common"
 }
 
 dependencies {
-    api(projects.core.model)
-    api(projects.core.session)
-    api(projects.core.datastore)
+
+
 }

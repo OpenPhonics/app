@@ -32,7 +32,7 @@ fun OpNavHost(
         homeScreen(navController::navigateToLesson)
         exploreScreen()
         bookmarksScreen()
-        settingsScreen()
+        settingsScreen(navController::navigateToLogin)
         loginScreen(navController::navigateToSignUp,navController::navigateToHome)
         signUpScreen(navController::navigateToLogin, navController::navigateToHome)
         lessonScreen(navController::navigateToHome)

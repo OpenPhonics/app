@@ -17,23 +17,28 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.advaitvedant.design.component.OpBackground
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.advaitvedant.design.component.OpTopAppBar
 import com.advaitvedant.design.theme.LocalBorderPadding
-import com.advaitvedant.design.theme.OpTheme
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun SettingsRoute(
     viewModel: SettingsViewModel = hiltViewModel(),
+    onSignOut: () -> Unit
 ) {
     Column(modifier = Modifier.fillMaxWidth()){
         OpTopAppBar(title = stringResource(R.string.settings))
         SettingsScreen(
-            onSignOut = viewModel::logout
+            onSignOut = {
+                viewModel.logout()
+                onSignOut()
+            },
+            isDarkMode = viewModel.darkTheme,
+            switchTheme = viewModel::switchDarkTheme
         )
     }
 
@@ -41,8 +46,11 @@ fun SettingsRoute(
 
 @Composable
 fun SettingsScreen(
-    onSignOut: () -> Unit
+    onSignOut: () -> Unit,
+    isDarkMode: Flow<Boolean>,
+    switchTheme: (Boolean) -> Unit
 ){
+    val darkMode = isDarkMode.collectAsStateWithLifecycle(initialValue = false)
     Column(modifier = Modifier.fillMaxWidth()) {
         Column(
             modifier = Modifier
@@ -53,7 +61,8 @@ fun SettingsScreen(
         ) {
             SettingsBlockSwitch(
                 text = stringResource(R.string.dark_mode),
-                onSwitch = {}
+                checked = darkMode.value,
+                onSwitch = switchTheme
             )
             SettingsBlockButton(
                 textColor = MaterialTheme.colorScheme.error,
@@ -83,8 +92,7 @@ fun SettingsBlockButton(textColor: Color, text: String, onClick: () -> Unit) {
     }
 }
 @Composable
-fun SettingsBlockSwitch(text: String, onSwitch: (Boolean) -> Unit){
-//    val checked = mutableStateOf()
+fun SettingsBlockSwitch(text: String, checked: Boolean, onSwitch: (Boolean) -> Unit){
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -100,41 +108,39 @@ fun SettingsBlockSwitch(text: String, onSwitch: (Boolean) -> Unit){
             fontSize = MaterialTheme.typography.titleMedium.fontSize
         )
         Switch(
-            checked = true ,
-            onCheckedChange = {
-                onSwitch
-            }
+            checked = checked,
+            onCheckedChange = onSwitch
         )
     }
 }
 
 
-@Composable
-@Preview(showBackground = true)
-fun SettingsBlock() {
-    OpTheme(darkTheme = true) {
-        OpBackground {
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Column(
-                    modifier = Modifier
-                        .padding(
-                            top = LocalBorderPadding.current.calculateTopPadding()
-                        )
-                        .fillMaxWidth()
-                ) {
-                    SettingsBlockSwitch(
-                        text = stringResource(R.string.dark_mode),
-                        onSwitch = {})
-                    SettingsBlockButton(
-                        textColor = MaterialTheme.colorScheme.error,
-                        text = stringResource(R.string.sign_out),
-                        onClick = {}
-                    )
-                }
-            }
-        }
-    }
-}
+//@Composable
+//@Preview(showBackground = true)
+//fun SettingsBlock() {
+//    OpTheme(darkTheme = true) {
+//        OpBackground {
+//            Column(modifier = Modifier.fillMaxWidth()) {
+//                Column(
+//                    modifier = Modifier
+//                        .padding(
+//                            top = LocalBorderPadding.current.calculateTopPadding()
+//                        )
+//                        .fillMaxWidth()
+//                ) {
+//                    SettingsBlockSwitch(
+//                        text = stringResource(R.string.dark_mode),
+//                        onSwitch = {})
+//                    SettingsBlockButton(
+//                        textColor = MaterialTheme.colorScheme.error,
+//                        text = stringResource(R.string.sign_out),
+//                        onClick = {}
+//                    )
+//                }
+//            }
+//        }
+//    }
+//}
 
 fun Modifier.horizontalBorder(borderWidth: Dp, color: Color) =
     this.drawWithContent {

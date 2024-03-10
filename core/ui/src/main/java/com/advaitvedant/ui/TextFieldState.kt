@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -114,12 +113,3 @@ open class TextFieldState(
     }
 }
 
-fun textFieldStateSaver(state: TextFieldState) = listSaver<TextFieldState, Any>(
-    save = { listOf(it.text, it.isFocusedDirty) },
-    restore = {
-        state.apply {
-            text = it[0] as String
-            isFocusedDirty = it[1] as Boolean
-        }
-    }
-)

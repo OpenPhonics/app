@@ -11,21 +11,26 @@ import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSiz
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import com.advaitevdant.data.repository.AuthRepository
 import com.advaitvedant.design.theme.OpTheme
 import com.advaitvedant.openphonics.ui.OpApp
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
+    lateinit var authRepository: AuthRepository
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
             EdgeSettings()
-            OpTheme {
+            OpTheme() {
                 OpApp(
-                    windowSizeClass = calculateWindowSizeClass(this)
+                    windowSizeClass = calculateWindowSizeClass(this),
+                    auth = authRepository
                 )
             }
         }

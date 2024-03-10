@@ -19,7 +19,7 @@ import com.advaitvedant.home.HOME_ROUTE
 import com.advaitvedant.home.navigateToHome
 import com.advaitvedant.openphonics.navigation.TopLevelDestination
 import com.advaitvedant.settings.navigateToSettings
-import com.advaitvedant.settings.settingsRoute
+import com.advaitvedant.settings.SETTINGS_ROUTE
 
 @Composable
 fun rememberOpAppState(
@@ -53,7 +53,7 @@ class OpAppState(
             HOME_ROUTE -> TopLevelDestination.HOME
             EXPLORE_ROUTE -> TopLevelDestination.EXPLORE
             BOOKMARKS_ROUTE -> TopLevelDestination.BOOKMARKS
-            settingsRoute -> TopLevelDestination.SETTINGS
+            SETTINGS_ROUTE -> TopLevelDestination.SETTINGS
             else -> null
         }
 

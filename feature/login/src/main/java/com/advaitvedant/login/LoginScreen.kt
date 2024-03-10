@@ -2,19 +2,14 @@ package com.advaitvedant.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,55 +21,44 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.advaitvedant.design.component.OpTopAppBar
+import com.advaitvedant.design.theme.LocalBorderPadding
 import com.advaitvedant.ui.TextInput
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginRoute(
     onLoginComplete: () -> Unit,
     onNavigateToSignUp: () -> Unit,
     viewModel: LoginViewModel = hiltViewModel()
 ){
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Welcome Back",
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier
-                            .padding(horizontal = 16.dp)
-                    )
-                },
+    Column(modifier = Modifier.fillMaxSize()){
+        OpTopAppBar(title = stringResource(R.string.welcome_back))
+        LoginScreen(
+            onNavigateToSignUp = onNavigateToSignUp,
+            onSubmit = { name ->
+                viewModel.login(
+                    name = name.text,
+                    onLoginCompleted = onLoginComplete,
+                    onLoginFailed = { name.doesNameExist.value = false}
                 )
-        },
-        content = { contentPadding ->
-            LoginScreen(
-                contentPadding = contentPadding,
-                onNavigateToSignUp = onNavigateToSignUp,
-                onSubmit = { name ->
-                    viewModel.login(name, onLoginComplete)
-                }
-            )
-        }
-    )
+            },
+        )
+    }
 }
 @Composable
 internal fun LoginScreen(
-    contentPadding: PaddingValues,
-    onSubmit: (name: String) -> Unit,
+    onSubmit: (name: NameState) -> Unit,
     onNavigateToSignUp: () -> Unit
 ){
     Column(
         modifier = Modifier
-            .padding(contentPadding)
-            .fillMaxSize(),
-
+            .padding(LocalBorderPadding.current)
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ){
         val focusRequester = remember { FocusRequester() }
-        val nameState by rememberSaveable(stateSaver = NameStateSaver){
+        val nameState by rememberSaveable(stateSaver = NameStateSaver) {
             mutableStateOf(NameState())
         }
         TextInput(
@@ -82,12 +66,15 @@ internal fun LoginScreen(
             textState = nameState,
             onImeAction = { focusRequester.requestFocus() }
         )
+        TextButton(onClick = onNavigateToSignUp){
+            Text(stringResource(R.string.create_account))
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         val submit = {
             if (nameState.isValid) {
-                onSubmit(nameState.text)
+                onSubmit(nameState)
             }
         }
         Button(
@@ -99,16 +86,6 @@ internal fun LoginScreen(
         ) {
             Text(
                 text = stringResource(R.string.login)
-            )
-        }
-        OutlinedButton(
-            onClick = onNavigateToSignUp,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 16.dp),
-        ) {
-            Text(
-                text = "Sign up"
             )
         }
     }

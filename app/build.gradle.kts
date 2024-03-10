@@ -14,6 +14,7 @@ android {
 
 dependencies {
     implementation(projects.core.design)
+    implementation(projects.core.data)
 
     implementation(projects.feature.home)
     implementation(projects.feature.explore)
@@ -25,6 +26,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.core.splashscreen)
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.bundles.compose)

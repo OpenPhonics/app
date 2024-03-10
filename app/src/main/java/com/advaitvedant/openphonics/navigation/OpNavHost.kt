@@ -9,7 +9,7 @@ import com.advaitvedant.home.homeScreen
 import com.advaitvedant.home.navigateToHome
 import com.advaitvedant.lesson.lessonScreen
 import com.advaitvedant.lesson.navigateToLesson
-import com.advaitvedant.login.loginRoute
+import com.advaitvedant.login.LOGIN_ROUTE
 import com.advaitvedant.login.loginScreen
 import com.advaitvedant.login.navigateToLogin
 import com.advaitvedant.openphonics.ui.OpAppState
@@ -21,7 +21,7 @@ import com.advaitvedant.signup.signUpScreen
 fun OpNavHost(
     appState: OpAppState,
     modifier: Modifier = Modifier,
-    startDestination: String = loginRoute,
+    startDestination: String = LOGIN_ROUTE,
 ) {
     val navController = appState.navController
     NavHost(

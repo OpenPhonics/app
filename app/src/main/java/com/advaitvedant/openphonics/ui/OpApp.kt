@@ -26,17 +26,21 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
+import com.advaitevdant.data.repository.AuthRepository
 import com.advaitvedant.design.component.OpBackground
 import com.advaitvedant.design.component.OpNavigationBar
 import com.advaitvedant.design.component.OpNavigationBarItem
 import com.advaitvedant.design.component.OpNavigationRail
 import com.advaitvedant.design.component.OpNavigationRailItem
+import com.advaitvedant.home.HOME_ROUTE
+import com.advaitvedant.login.LOGIN_ROUTE
 import com.advaitvedant.openphonics.navigation.OpNavHost
 import com.advaitvedant.openphonics.navigation.TopLevelDestination
 
 @Composable
 fun OpApp(
     windowSizeClass: WindowSizeClass,
+    auth: AuthRepository,
     appState: OpAppState = rememberOpAppState(
         windowSizeClass = windowSizeClass,
     ),
@@ -81,7 +85,7 @@ fun OpApp(
                     )
                 }
                 Column(Modifier.fillMaxSize()) {
-                    OpNavHost(appState = appState)
+                    OpNavHost(appState = appState, startDestination = if (auth.isLoggedIn) HOME_ROUTE else LOGIN_ROUTE)
                 }
             }
         }

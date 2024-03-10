@@ -10,7 +10,7 @@ enum class TopLevelDestination(
 ) {
     HOME(
         icon = OpIcons.Home,
-        text = R.string.home,
+        text = R.string.home
     ),
     EXPLORE(
         icon = OpIcons.Explore,

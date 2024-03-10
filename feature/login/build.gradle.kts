@@ -8,4 +8,6 @@ android {
 
 dependencies {
     implementation(projects.core.ui)
+    implementation(projects.core.design)
+    implementation(projects.core.data)
 }

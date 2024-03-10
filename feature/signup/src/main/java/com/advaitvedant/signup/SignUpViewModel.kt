@@ -1,23 +1,33 @@
 package com.advaitvedant.signup
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.listSaver
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.advaitevdant.data.repository.AuthRepository
 import com.advaitvedant.ui.TextFieldState
-import com.advaitvedant.ui.textFieldStateSaver
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor() : ViewModel() {
+class SignUpViewModel @Inject constructor(
+    val auth: AuthRepository
+) : ViewModel() {
     fun signUp(
         name: String,
-        onSignUpComplete: () -> Unit,
+        onSignUpCompleted: () -> Unit,
+        onSignUpFailed: () -> Unit
     ){
-        onSignUpComplete()
+        viewModelScope.launch {
+            if (auth.signup(name)) {
+                onSignUpCompleted()
+            } else {
+                onSignUpFailed()
+            }
+        }
     }
-
-    fun isNameAlreadyUsed(name: String) = true
 }
 
 private const val NAME_VALIDATION_REGEX = "^[a-zA-Z]+$"
@@ -54,6 +64,15 @@ private fun nameValidationError(name: String): String {
     return "Invalid name: $name"
 }
 
+fun nameStateSaver(state: NameState) = listSaver<NameState, Any>(
+    save = { listOf(it.text, it.isFocusedDirty, it.isNameAlreadyUsed.value) },
+    restore = {
+        state.apply {
+            text = it[0] as String
+            isFocusedDirty = it[1] as Boolean
+            isNameAlreadyUsed.value = it[2] as Boolean
+        }
+    }
+)
 
-
-val NameStateSaver = textFieldStateSaver(NameState())
+val NameStateSaver = nameStateSaver(NameState())

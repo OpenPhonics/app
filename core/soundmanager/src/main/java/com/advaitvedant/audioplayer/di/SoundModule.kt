@@ -2,6 +2,7 @@ package com.advaitvedant.audioplayer.di
 
 import android.content.Context
 import com.advaitvedant.audioplayer.SoundManager
+import com.advaitvedant.audioplayer.SoundPlayer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +15,12 @@ import javax.inject.Singleton
 object SoundModule {
     @Provides
     @Singleton
-    fun provideAudioPlayer(@ApplicationContext application: Context): SoundManager {
+    fun provideSoundPlayer(@ApplicationContext application: Context): SoundPlayer {
+        return SoundPlayer(application)
+    }
+    @Provides
+    @Singleton
+    fun provideSoundManager(@ApplicationContext application: Context): SoundManager {
         return SoundManager(application)
     }
 }

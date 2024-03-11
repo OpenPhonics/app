@@ -4,8 +4,9 @@ plugins {
 }
 
 android {
-    namespace = "com.advaitvedant.audioplayer"
+    namespace = "com.advaitvedant.soundmanager"
 }
 
 dependencies {
+    api(projects.core.common)
 }

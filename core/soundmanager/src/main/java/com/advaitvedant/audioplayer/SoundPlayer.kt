@@ -11,15 +11,15 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 
 
-class SoundManager(@ApplicationContext val context: Context){
+class SoundPlayer(@ApplicationContext val context: Context){
     private val soundPool: SoundPool
-    private val soundMap: MutableMap<Int, Int> = mutableMapOf()
-    private val soundQueue: MutableList<Int> = mutableListOf()
+    private val soundMap: MutableMap<String, Int> = mutableMapOf()
+    private val soundQueue: MutableList<String> = mutableListOf()
 
     init {
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
             .build()
         soundPool = SoundPool.Builder()
             .setMaxStreams(MAX_STREAMS)
@@ -28,12 +28,19 @@ class SoundManager(@ApplicationContext val context: Context){
     }
 
     fun preload(@RawRes soundResId: Int){
-        val soundId  = soundPool.load(context, soundResId, 1)
-        soundMap[soundResId] = soundId
+        val soundId  = soundPool.load(context, soundResId, PRIORITY)
+        soundMap[soundResId.toString()] = soundId
+    }
+    fun preload(file: String){
+        val soundId = soundPool.load(file, PRIORITY)
+        soundMap[file] = soundId
     }
 
     fun enqueue(@RawRes soundResId: Int){
-        soundQueue.add(soundResId)
+        enqueue(soundResId.toString())
+    }
+    fun enqueue(file: String){
+        soundQueue.add(file)
         if (soundQueue.size == 1){
             playNext()
         }
@@ -41,8 +48,8 @@ class SoundManager(@ApplicationContext val context: Context){
 
     private fun playNext(){
         if (soundQueue.isNotEmpty()){
-            val soundResId = soundQueue.removeFirst()
-            soundMap[soundResId]?.let { sound ->
+            val soundId = soundQueue.removeFirst()
+            soundMap[soundId]?.let { sound ->
                 soundPool.play(sound, VOLUME, VOLUME, PRIORITY, LOOP, RATE)
             }
             if (soundQueue.isNotEmpty()){
@@ -51,6 +58,14 @@ class SoundManager(@ApplicationContext val context: Context){
                 }, DELAY)
             }
         }
+    }
+
+    fun stop(){
+        soundPool.autoPause()
+        soundQueue.clear()
+    }
+    fun release(){
+        soundPool.release()
     }
     companion object {
         private const val MAX_STREAMS = 1

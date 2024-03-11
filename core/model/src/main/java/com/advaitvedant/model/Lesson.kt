@@ -5,7 +5,6 @@ data class Lesson(
     val num: Int = -1,
     val phonetic: String = "",
     val state: LessonState = LessonState.LOCKED,
-    val progress: Float? = 0f,
 )
 
 data class LessonWithData(
@@ -13,7 +12,6 @@ data class LessonWithData(
     val num: Int = -1,
     val phonetic: String = "",
     val state: LessonState = LessonState.LOCKED,
-    val progress: Float? = 0f,
     val words: List<Word> = emptyList(),
     val sentences: List<Sentence> = emptyList()
 )

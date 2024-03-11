@@ -7,4 +7,8 @@ android {
 }
 
 dependencies {
+    api(projects.core.data)
+    api(projects.core.model)
+    api(projects.core.soundmanager)
+    api(projects.core.speechtotext)
 }

@@ -32,6 +32,8 @@
             <option value="$PROJECT_DIR$/core/design" />
             <option value="$PROJECT_DIR$/core/model" />
             <option value="$PROJECT_DIR$/core/session" />
+            <option value="$PROJECT_DIR$/core/soundmanager" />
+            <option value="$PROJECT_DIR$/core/speechtotext" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/bookmarks" />

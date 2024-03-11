@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,12 +33,16 @@ class LessonViewModel @Inject constructor(
                 lessonId,
                 listOf(
                     Pair(
-                        "raw/then.mp3",
+                        "then.mp3",
                         "https://storage.googleapis.com/openphonics.appspot.com/words/en/Then.mp3"
                     )
                 )
             )
         }
+        val dir = File(context.filesDir, lessonId.toString())
+
+        soundPlayer.preload(File(dir, "then.mp3").absolutePath)
+
         soundPlayer.preload(R.raw.then)
     }
     private val lessonId
@@ -45,11 +50,18 @@ class LessonViewModel @Inject constructor(
     val loading: StateFlow<Boolean>
         get() = soundPlayer.loadedAllSounds
     fun playSound(){
-//        val dir = File(context.filesDir, lessonId.toString())
-//        soundPlayer.preload(File(dir, "raw/then.mp3").absolutePath)
-//        soundPlayer.enqueue(File(dir, "raw/then.mp3").absolutePath)
+        val dir = File(context.filesDir, lessonId.toString())
+        viewModelScope.launch {
+            soundPlayer.enqueue(File(dir, "then.mp3").absolutePath)
+//            delay(500L)
+            soundPlayer.enqueue(File(dir, "then.mp3").absolutePath)
+//            delay(500L)
+            soundPlayer.enqueue(File(dir, "then.mp3").absolutePath)
+//            delay(500L)
+            soundPlayer.enqueue(File(dir, "then.mp3").absolutePath)
+        }
 
-//        soundPlayer.preload(R.raw.then)
+        soundPlayer.enqueue(R.raw.then)
         soundPlayer.enqueue(R.raw.then)
     }
 

@@ -2,7 +2,9 @@ package com.advaitvedant.audioplayer
 
 import android.content.Context
 import android.media.AudioAttributes
+import android.media.MediaMetadataRetriever
 import android.media.SoundPool
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.RawRes
@@ -14,12 +16,32 @@ import kotlinx.coroutines.flow.asStateFlow
 class SoundPlayer(@ApplicationContext val context: Context){
     private val soundPool: SoundPool
     private val soundMap: MutableMap<String, Int> = mutableMapOf()
+    private val soundDuration: MutableMap<String, Long> = mutableMapOf()
     private val soundQueue: MutableList<String> = mutableListOf()
     private var soundsLoaded = 0
-    private var totalSounds = 0
+    private var playing = false
     private val _loadedAllSounds = MutableStateFlow(true)
     val loadedAllSounds = _loadedAllSounds.asStateFlow()
-
+    private fun loadDuration(file: String) {
+        val retriever = MediaMetadataRetriever()
+        try {
+            retriever.setDataSource(file)
+            val durationStr = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
+            soundDuration[file] = durationStr?.toLong() ?: 0L
+        } finally {
+            retriever.release()
+        }
+    }
+    private fun loadDuration(@RawRes soundResId: Int){
+        val retriever = MediaMetadataRetriever()
+        try {
+            retriever.setDataSource(context, Uri.parse("android.resource://${context.packageName}/${soundResId}"))
+            val durationStr = retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)
+            soundDuration[soundResId.toString()] = durationStr?.toLong() ?: 0L
+        } finally {
+            retriever.release()
+        }
+    }
     init {
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)
@@ -42,10 +64,12 @@ class SoundPlayer(@ApplicationContext val context: Context){
     }
     fun preload(@RawRes soundResId: Int){
         val soundId  = soundPool.load(context, soundResId, PRIORITY)
+        loadDuration(soundResId)
         add(soundResId.toString(), soundId)
     }
     fun preload(file: String){
         val soundId = soundPool.load(file, PRIORITY)
+        loadDuration(file)
         add(file, soundId)
     }
 
@@ -54,22 +78,23 @@ class SoundPlayer(@ApplicationContext val context: Context){
     }
     fun enqueue(file: String){
         soundQueue.add(file)
-        if (soundQueue.size == 1){
+        if (soundQueue.size >= 1 && !playing){
             playNext()
         }
     }
 
     private fun playNext(){
         if (soundQueue.isNotEmpty()){
-            val soundId = soundQueue.removeFirst()
-            soundMap[soundId]?.let { sound ->
+            val soundKey = soundQueue.removeFirst()
+            soundMap[soundKey]?.let { sound ->
+                playing = true
                 soundPool.play(sound, VOLUME, VOLUME, PRIORITY, LOOP, RATE)
             }
-            if (soundQueue.isNotEmpty()){
-                Handler(Looper.getMainLooper()).postDelayed({
-                    playNext()
-                }, DELAY)
-            }
+            Handler(Looper.getMainLooper()).postDelayed({
+                playNext()
+            }, soundDuration[soundKey] ?: 0L)
+        } else {
+            playing = false
         }
     }
 

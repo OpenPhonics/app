@@ -36,7 +36,7 @@ class LessonViewModel @Inject constructor(
     private val dir = File(context.filesDir, lessonId.toString()).absolutePath
     private val lessonId
         get() = lessonArgs.lesson
-    val loading: StateFlow<Boolean>
+    val soundsLoaded: StateFlow<Boolean>
         get() = soundPlayer.loadedAllSounds
 
     init {
@@ -56,11 +56,14 @@ class LessonViewModel @Inject constructor(
     fun reset(){
         stt.resetText()
     }
+    fun playSound(word: String){
+        soundPlayer.enqueue("$dir/$word.mp3")
+    }
     val lessonState: StateFlow<LessonUiState> =
         data.lesson(lessonId)
             .map {
-                soundManager.downloadBatch(lessonId, it.words.map { word -> Pair(word.text+".mp3", enmp3(word.text))})
-                soundManager.downloadBatch(lessonId, it.words.map { word -> Pair(word.translation+".mp3", tamp3(word.translation))})
+                soundManager.downloadBatch(lessonId, it.words.map { word -> Pair(word.text+".mp3", enmp3(word.text+".mp3"))})
+                soundManager.downloadBatch(lessonId, it.words.map { word -> Pair(word.translation+".mp3", tamp3(word.translation+".mp3"))})
                 it.words.forEach { word ->
                     soundPlayer.preload("$dir/${word.text}.mp3")
                     soundPlayer.preload("$dir/${word.translation}.mp3")

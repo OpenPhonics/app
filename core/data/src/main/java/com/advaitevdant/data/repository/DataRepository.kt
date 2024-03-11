@@ -3,6 +3,7 @@ package com.advaitevdant.data.repository
 import com.advaitvedant.model.Lesson
 import com.advaitvedant.model.LessonState
 import com.advaitvedant.model.LessonWithData
+import com.advaitvedant.model.Word
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -30,7 +31,43 @@ class DataRepositoryImpl @Inject constructor() : DataRepository {
     }
     override fun lesson(id: Int): Flow<LessonWithData>  = flow {
         emit(LessonWithData(
-            id = id
+            id = id,
+            words = listOf(Word(
+                id = 0,
+                phonetic = "",
+                text = "hello",
+                translation = "வணக்கம்",
+                isLearned = false
+            ),
+                Word(
+                    id = 0,
+                    phonetic = "",
+                    text = "hello",
+                    translation = "வணக்கம்",
+                    isLearned = false
+                ),
+                Word(
+                    id = 0,
+                    phonetic = "",
+                    text = "hello",
+                    translation = "வணக்கம்",
+                    isLearned = false
+                ),
+                Word(
+                    id = 0,
+                    phonetic = "",
+                    text = "hello",
+                    translation = "வணக்கம்",
+                    isLearned = false
+                ),
+                Word(
+                    id = 0,
+                    phonetic = "",
+                    text = "hello",
+                    translation = "வணக்கம்",
+                    isLearned = false
+                )
+            )
         ))
     }
 

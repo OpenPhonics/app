@@ -9,6 +9,9 @@ import javax.inject.Inject
 
 interface DataRepository {
     fun lessons(): Flow<List<Lesson>>
+
+    fun updateProgress(lessonId: Int)
+
     fun lesson(id: Int): Flow<LessonWithData>
 }
 class DataRepositoryImpl @Inject constructor() : DataRepository {
@@ -26,6 +29,10 @@ class DataRepositoryImpl @Inject constructor() : DataRepository {
             lessons.add(Lesson(num, num, phonetic, state))
         }
         emit(lessons)
+    }
+
+    override fun updateProgress(lessonId: Int) {
+        TODO("Not yet implemented")
     }
 
     override fun lesson(id: Int): Flow<LessonWithData> {

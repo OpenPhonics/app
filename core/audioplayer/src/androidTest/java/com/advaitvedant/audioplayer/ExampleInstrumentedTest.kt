@@ -1,5 +1,5 @@
-package com.advaitvedant.datastore
-
+package com.advaitvedant.audioplayer
+//
 //import androidx.test.platform.app.InstrumentationRegistry
 //import androidx.test.ext.junit.runners.AndroidJUnit4
 //
@@ -7,7 +7,7 @@ package com.advaitvedant.datastore
 //import org.junit.runner.RunWith
 //
 //import org.junit.Assert.*
-//
+
 ///**
 // * Instrumented test, which will execute on an Android device.
 // *
@@ -19,6 +19,6 @@ package com.advaitvedant.datastore
 //    fun useAppContext() {
 //        // Context of the app under test.
 //        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-//        assertEquals("com.advaitvedant.datastore.test", appContext.packageName)
+//        assertEquals("com.advaitvedant.audioplayer.test", appContext.packageName)
 //    }
 //}

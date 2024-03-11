@@ -7,14 +7,18 @@ import android.os.Handler
 import android.os.Looper
 import androidx.annotation.RawRes
 import dagger.hilt.android.qualifiers.ApplicationContext
-
-
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 
 class SoundPlayer(@ApplicationContext val context: Context){
     private val soundPool: SoundPool
     private val soundMap: MutableMap<String, Int> = mutableMapOf()
     private val soundQueue: MutableList<String> = mutableListOf()
+    private var soundsLoaded = 0
+    private var totalSounds = 0
+    private val _loadedAllSounds = MutableStateFlow(true)
+    val loadedAllSounds = _loadedAllSounds.asStateFlow()
 
     init {
         val audioAttributes = AudioAttributes.Builder()
@@ -25,15 +29,24 @@ class SoundPlayer(@ApplicationContext val context: Context){
             .setMaxStreams(MAX_STREAMS)
             .setAudioAttributes(audioAttributes)
             .build()
+        soundPool.setOnLoadCompleteListener { _, _, _ ->
+            soundsLoaded ++
+            if (soundsLoaded == soundMap.size){
+                _loadedAllSounds.value = true
+            }
+        }
     }
-
+    private fun add(key: String, soundId: Int){
+        soundMap[key] = soundId
+        _loadedAllSounds.value = false
+    }
     fun preload(@RawRes soundResId: Int){
         val soundId  = soundPool.load(context, soundResId, PRIORITY)
-        soundMap[soundResId.toString()] = soundId
+        add(soundResId.toString(), soundId)
     }
     fun preload(file: String){
         val soundId = soundPool.load(file, PRIORITY)
-        soundMap[file] = soundId
+        add(file, soundId)
     }
 
     fun enqueue(@RawRes soundResId: Int){
@@ -63,6 +76,14 @@ class SoundPlayer(@ApplicationContext val context: Context){
     fun stop(){
         soundPool.autoPause()
         soundQueue.clear()
+    }
+    fun reset(){
+        stop()
+        soundMap.forEach { (_, soundId) ->
+            soundPool.unload(soundId)
+        }
+        _loadedAllSounds.value = false
+        soundMap.clear()
     }
     fun release(){
         soundPool.release()

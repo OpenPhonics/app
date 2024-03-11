@@ -38,15 +38,18 @@ class LessonViewModel @Inject constructor(
                 )
             )
         }
+        soundPlayer.preload(R.raw.then)
     }
     private val lessonId
         get() = lessonArgs.lesson
+    val loading: StateFlow<Boolean>
+        get() = soundPlayer.loadedAllSounds
     fun playSound(){
 //        val dir = File(context.filesDir, lessonId.toString())
 //        soundPlayer.preload(File(dir, "raw/then.mp3").absolutePath)
 //        soundPlayer.enqueue(File(dir, "raw/then.mp3").absolutePath)
 
-        soundPlayer.preload(R.raw.then)
+//        soundPlayer.preload(R.raw.then)
         soundPlayer.enqueue(R.raw.then)
     }
 

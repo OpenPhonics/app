@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="name">Name</string>
+    <string name="cont">CONTINUE</string>
+    <string name="lesson">LESSON %1$s</string>
 </resources>

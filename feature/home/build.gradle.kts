@@ -13,4 +13,5 @@ dependencies {
     implementation(projects.core.model)
 
     implementation(projects.core.design)
+    implementation(projects.core.ui)
 }

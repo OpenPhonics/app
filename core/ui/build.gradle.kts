@@ -10,4 +10,8 @@ android {
 dependencies {
 
     implementation(libs.bundles.compose)
+//    api(projects.core.model)
+    api(projects.core.design)
+    debugImplementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
 }

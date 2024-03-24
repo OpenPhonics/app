@@ -12,7 +12,7 @@ fun OpBackground(
     content: @Composable () -> Unit,
 ) {
     Surface(
-        color = MaterialTheme.colorScheme.background,
+        color = MaterialTheme.colorScheme.surfaceContainerHigh,
         modifier = modifier.fillMaxSize(),
     ) {
         content()

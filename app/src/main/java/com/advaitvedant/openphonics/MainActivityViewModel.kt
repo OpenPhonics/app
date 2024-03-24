@@ -15,9 +15,7 @@ import javax.inject.Inject
 class MainActivityViewModel @Inject constructor(
     userDataRepository: UserDataRepository,
 ) : ViewModel() {
-    val uiState: StateFlow<MainActivityUiState> = userDataRepository.userData.map {
-        MainActivityUiState.Success(it)
-    }.stateIn(
+    val uiState: StateFlow<MainActivityUiState> = userDataRepository.userData.map(MainActivityUiState::Success).stateIn(
         scope = viewModelScope,
         initialValue = MainActivityUiState.Loading,
         started = SharingStarted.WhileSubscribed(5_000),

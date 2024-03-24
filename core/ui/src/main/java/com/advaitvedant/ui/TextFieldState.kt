@@ -22,11 +22,12 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun TextInput(
+    modifier: Modifier = Modifier,
     label: String,
     keyboard: KeyboardType= KeyboardType.Text,
     textState: TextFieldState = remember { TextFieldState() },
     imeAction: ImeAction = ImeAction.Next,
-    onImeAction: () -> Unit = {}
+    onImeAction: () -> Unit = {},
 ) {
     OutlinedTextField(
         value = textState.text,
@@ -39,7 +40,7 @@ fun TextInput(
                 style = MaterialTheme.typography.bodyMedium,
             )
         },
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .onFocusChanged { focusState ->
                 textState.onFocusChange(focusState.isFocused)
@@ -64,8 +65,11 @@ fun TextInput(
     textState.getError()?.let { error -> TextFieldError(textError = error) }
 }
 @Composable
-fun TextFieldError(textError: String) {
-    Row(modifier = Modifier.fillMaxWidth()) {
+fun TextFieldError(
+    modifier: Modifier = Modifier,
+    textError: String)
+{
+    Row(modifier = modifier.fillMaxWidth()) {
         Spacer(modifier = Modifier.width(16.dp))
         Text(
             text = textError,

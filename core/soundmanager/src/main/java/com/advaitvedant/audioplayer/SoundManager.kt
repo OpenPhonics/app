@@ -25,6 +25,10 @@ class SoundManager(@ApplicationContext val context: Context){
         }
         coroutineScope {
             files.forEach { (fileName, fileUrl) ->
+                val file = File(batchDir, fileName)
+                if (file.exists()){
+                    return@forEach
+                }
                 launch {
                     try {
                         withContext(Dispatchers.IO) { // Perform network operations in IO dispatcher
@@ -32,7 +36,6 @@ class SoundManager(@ApplicationContext val context: Context){
                             val connection = url.openConnection()
                             connection.connect()
                             val inputStream = BufferedInputStream(url.openStream())
-                            val file = File(batchDir, fileName)
                             FileOutputStream(file).use { outputStream ->
                                 inputStream.copyTo(outputStream)
                             }

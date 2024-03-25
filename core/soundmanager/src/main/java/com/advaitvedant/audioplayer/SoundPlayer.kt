@@ -58,23 +58,30 @@ class SoundPlayer(@ApplicationContext val context: Context){
             }
         }
     }
-    private fun add(key: String, soundId: Int){
-        soundMap[key] = soundId
-        _loadedAllSounds.value = false
-    }
     fun preload(@RawRes soundResId: Int){
+        if (soundMap.containsKey(soundResId.toString())) {
+            return
+        }
+        _loadedAllSounds.value = false
         val soundId  = soundPool.load(context, soundResId, PRIORITY)
+        soundMap[soundResId.toString()] = soundId
         loadDuration(soundResId)
-        add(soundResId.toString(), soundId)
     }
     fun preload(file: String){
+        if (soundMap.containsKey(file)){
+            return
+        }
+        _loadedAllSounds.value = false
         val soundId = soundPool.load(file, PRIORITY)
+        soundMap[file] = soundId
         loadDuration(file)
-        add(file, soundId)
     }
 
     fun enqueue(@RawRes soundResId: Int){
         enqueue(soundResId.toString())
+        if (soundQueue.size >= 1 && !playing){
+            playNext()
+        }
     }
     fun enqueue(file: String){
         soundQueue.add(file)
@@ -119,6 +126,5 @@ class SoundPlayer(@ApplicationContext val context: Context){
         private const val PRIORITY = 1
         private const val LOOP = 0
         private const val RATE = 1f
-        private const val DELAY = 500L
     }
 }

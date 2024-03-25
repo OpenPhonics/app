@@ -1,6 +1,7 @@
 package com.advaitvedant.design.icon
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.outlined.Hexagon
 import androidx.compose.material.icons.outlined.Search
@@ -19,4 +20,5 @@ object OpIcons {
     val Play = Icons.Rounded.PlayCircle
     val Close = Icons.Rounded.Close
     val Lock = Icons.Rounded.RemoveCircle
+    val BackArrow = Icons.AutoMirrored.Rounded.ArrowBack
 }

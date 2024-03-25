@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -23,13 +24,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.advaitvedant.design.component.OpBackground
 import com.advaitvedant.design.icon.OpIcons
 import com.advaitvedant.design.theme.OpTheme
 
-private const val s = "CONTINUE"
 
 @Composable
 fun LessonCard(
@@ -70,14 +71,17 @@ fun LessonCard(
                     )
                     Text(
                         text = phonetic,
-                        style = MaterialTheme.typography.titleLarge,
-                        color = Color.White
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onBackground
                     )
                 }
             }
-            Button(onClick = onClick, shape = RoundedCornerShape(6.dp), colors = ButtonDefaults.buttonColors(containerColor = color)) {
+            Button(
+                modifier = Modifier.padding(start = 12.dp).widthIn(min = 120.dp),
+                onClick = onClick, shape = RoundedCornerShape(6.dp), colors = ButtonDefaults.buttonColors(containerColor = color)) {
                 Text(
-                    buttonText,
+                    textAlign = TextAlign.Center,
+                    text = buttonText,
                     style = MaterialTheme.typography.titleSmall,
                     color = Color.White
                 )
@@ -86,54 +90,6 @@ fun LessonCard(
     }
 }
 
-
-//@Preview(showBackground = true)
-//@Composable
-//fun LessonCardPreview(){
-//    OpTheme(darkTheme = true) {
-//        OpBackground {
-//            LessonCard(
-////                lesson = Lesson(
-////                    id = 1,
-////                    num  = 1,
-////                    phonetic = "a, b, c",
-////                    state = LessonState.LOCKED
-////                ),
-////                onClick = {},
-////                onLessonClick = {}
-//            )
-//        }
-//    }
-//}
-//@Preview
-//@Composable
-//fun Som(){
-//    OpTheme(darkTheme = true) {
-//        OpBackground {
-//            Column(modifier = Modifier.fillMaxSize()){
-//                Text("HOHOHHO")
-//            }
-//        }
-//    }
-//}
-@Preview
-@Composable
-fun LessonCardIcon() {
-    OpTheme(darkTheme = true) {
-        OpBackground {
-            Column {
-
-                Icon(
-                    imageVector = OpIcons.Play,
-                    contentDescription = "check icon",
-                    modifier = Modifier.size(28.dp),
-                    tint = MaterialTheme.colorScheme.primary
-                )
-
-            }
-        }
-    }
-}
 
 @Preview
 @Composable

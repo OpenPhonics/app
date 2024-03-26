@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.advaitevdant.data.repository.DataRepository
 import com.advaitvedant.audioplayer.SoundManager
 import com.advaitvedant.audioplayer.SoundPlayer
-import com.advaitvedant.model.LessonWithData
+import com.advaitvedant.model.PhoneticLessonData
 import com.advaitvedant.speechtotext.SpeechToTextParser
 import com.advaitvedant.ui.AnswerState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -109,7 +109,7 @@ sealed interface LessonUiState {
     data object Loading : LessonUiState
 
     data class Success(
-        val lesson: LessonWithData
+        val lesson: PhoneticLessonData
     ) : LessonUiState
 }
 enum class ListeningState {

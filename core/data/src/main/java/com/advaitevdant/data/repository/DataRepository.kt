@@ -1,21 +1,21 @@
 package com.advaitevdant.data.repository
 
-import com.advaitvedant.model.Lesson
+import com.advaitvedant.model.PhoneticLesson
 import com.advaitvedant.model.LessonState
-import com.advaitvedant.model.LessonWithData
+import com.advaitvedant.model.PhoneticLessonData
 import com.advaitvedant.model.Word
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 interface DataRepository {
-    fun lessons(): Flow<List<Lesson>>
+    fun lessons(): Flow<List<PhoneticLesson>>
 
-    fun lesson(id: Int): Flow<LessonWithData>
+    fun lesson(id: Int): Flow<PhoneticLessonData>
 }
 class DataRepositoryImpl @Inject constructor() : DataRepository {
-    override fun lessons(): Flow<List<Lesson>> = flow {
-        val lessons = mutableListOf<Lesson>()
+    override fun lessons(): Flow<List<PhoneticLesson>> = flow {
+        val phoneticLessons = mutableListOf<PhoneticLesson>()
         val phoneticAlphabet = ('a'..'z').toList()
         repeat(100) { index ->
             val num = index + 1
@@ -25,12 +25,12 @@ class DataRepositoryImpl @Inject constructor() : DataRepository {
                 index == 6 -> LessonState.PROGRESS
                 else -> LessonState.LOCKED
             }
-            lessons.add(Lesson(num, num, phonetic, state))
+            phoneticLessons.add(PhoneticLesson(num, num, phonetic, state))
         }
-        emit(lessons)
+        emit(phoneticLessons)
     }
-    override fun lesson(id: Int): Flow<LessonWithData>  = flow {
-        emit(LessonWithData(
+    override fun lesson(id: Int): Flow<PhoneticLessonData>  = flow {
+        emit(PhoneticLessonData(
             id = id,
             words = listOf(Word(
                 id = 0,

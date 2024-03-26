@@ -3,7 +3,7 @@ package com.advaitvedant.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.advaitevdant.data.repository.DataRepository
-import com.advaitvedant.model.Lesson
+import com.advaitvedant.model.PhoneticLesson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -29,6 +29,6 @@ sealed interface LessonListUiState {
     data object Loading : LessonListUiState
 
     data class Success(
-        val lessons: List<Lesson>
+        val phoneticLessons: List<PhoneticLesson>
     ) : LessonListUiState
 }

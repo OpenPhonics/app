@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.advaitvedant.design.component.OpTopAppBar
 import com.advaitvedant.design.icon.OpIcons
-import com.advaitvedant.model.Lesson
+import com.advaitvedant.model.PhoneticLesson
 import com.advaitvedant.model.LessonState
 import com.advaitvedant.ui.LessonCard
 
@@ -47,7 +47,7 @@ fun HomeScreen(
             LessonListUiState.Loading -> Unit
             is LessonListUiState.Success -> {
                 lessonList(
-                    lessons = lessonList.lessons,
+                    phoneticLessons = lessonList.phoneticLessons,
                     onLessonClick = onLessonClick
                 )
             }
@@ -56,9 +56,9 @@ fun HomeScreen(
 }
 
 fun LazyListScope.lessonList(
-    lessons: List<Lesson>, onLessonClick: (Int) -> Unit
+    phoneticLessons: List<PhoneticLesson>, onLessonClick: (Int) -> Unit
 ) {
-    items(items = lessons, key = { it.id }) {
+    items(items = phoneticLessons, key = { it.id }) {
         when (it.state) {
             LessonState.LOCKED -> {
                 LockedCard(lessonNumber = it.num,

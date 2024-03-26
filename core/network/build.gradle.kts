@@ -13,6 +13,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.session)
+    api(projects.core.model)
+    api(projects.core.session)
     implementation(libs.bundles.retrofit)
 }

@@ -24,10 +24,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LessonViewModel @Inject constructor(
-    val data: DataRepository,
-    val soundManager: SoundManager,
-    val soundPlayer: SoundPlayer,
-    val stt: SpeechToTextParser,
+    private val data: DataRepository,
+    private val soundManager: SoundManager,
+    private val soundPlayer: SoundPlayer,
+    private val stt: SpeechToTextParser,
     @ApplicationContext val context: Context,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {

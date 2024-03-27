@@ -2,7 +2,7 @@ package com.advaitvedant.network.retrofit
 
 import com.advaitvedant.network.OpNetworkDataSource
 import com.advaitvedant.network.interceptor.AuthInterceptor
-import com.advaitvedant.network.model.NetworkChangeList
+import com.advaitvedant.network.model.ChangeListNetwork
 import com.advaitvedant.network.model.PhoneticLessonDynamicNetwork
 import com.advaitvedant.network.model.PhoneticLessonNetwork
 import com.advaitvedant.network.model.SentenceNetwork
@@ -46,13 +46,13 @@ private interface OpServiceRetrofit {
     suspend fun sentences(@Query("id") ids: List<Int>?): BaseResponse<List<SentenceNetwork>>
 
     @GET(Routes.LESSONS + "/" + Routes.CHANGE_LIST)
-    suspend fun lessonsChangeList(@Query("after") after: Long?): BaseResponse<List<NetworkChangeList>>
+    suspend fun lessonsChangeList(@Query("after") after: Long?): BaseResponse<List<ChangeListNetwork>>
 
     @GET(Routes.WORDS + "/" + Routes.CHANGE_LIST)
-    suspend fun wordsChangeList(@Query("after") after: Long?): BaseResponse<List<NetworkChangeList>>
+    suspend fun wordsChangeList(@Query("after") after: Long?): BaseResponse<List<ChangeListNetwork>>
 
     @GET(Routes.SENTENCES + "/" + Routes.CHANGE_LIST)
-    suspend fun sentencesChangeList(@Query("after") after: Long?): BaseResponse<List<NetworkChangeList>>
+    suspend fun sentencesChangeList(@Query("after") after: Long?): BaseResponse<List<ChangeListNetwork>>
 
     @PATCH(Routes.LESSONS)
     suspend fun updateLessons(@Body lessons: List<PhoneticLessonDynamicNetwork>): BaseResponse<Boolean>
@@ -85,7 +85,7 @@ class RetrofitOpNetwork @Inject constructor(
     override suspend fun lessons(ids: List<Int>?): List<PhoneticLessonNetwork> =
         networkApi.lessons(ids).data
 
-    override suspend fun lessonsChangeList(updatedAfter: Long?): List<NetworkChangeList> =
+    override suspend fun lessonsChangeList(updatedAfter: Long?): List<ChangeListNetwork> =
         networkApi.lessonsChangeList(updatedAfter).data
 
     override suspend fun updateLessons(models: List<PhoneticLessonNetwork>): Boolean
@@ -97,7 +97,7 @@ class RetrofitOpNetwork @Inject constructor(
     override suspend fun words(ids: List<Int>?): List<WordNetwork>
         = networkApi.words(ids).data
 
-    override suspend fun wordsChangeList(updatedAfter: Long?): List<NetworkChangeList>
+    override suspend fun wordsChangeList(updatedAfter: Long?): List<ChangeListNetwork>
         = networkApi.wordsChangeList(updatedAfter).data
 
     override suspend fun updateWords(models: List<WordNetwork>): Boolean
@@ -109,7 +109,7 @@ class RetrofitOpNetwork @Inject constructor(
     override suspend fun sentences(ids: List<Int>?): List<SentenceNetwork>
         = networkApi.sentences(ids).data
 
-    override suspend fun sentencesChangeList(updatedAfter: Long?): List<NetworkChangeList>
+    override suspend fun sentencesChangeList(updatedAfter: Long?): List<ChangeListNetwork>
         = networkApi.sentencesChangeList(updatedAfter).data
 
 }

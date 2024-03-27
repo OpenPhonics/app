@@ -14,7 +14,7 @@ data class PhoneticLessonNetwork(
 
 @Serializable
 data class PhoneticLessonDynamicNetwork(
-    override val id: Int,
+    override val id: Int = -1,
     val state: LessonState = LessonState.LOCKED
 ) : NetworkModel
 

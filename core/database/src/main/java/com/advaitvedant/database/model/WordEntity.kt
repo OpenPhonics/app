@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity("word_change_list_entity")
+@Entity("word_change_lists")
 data class WordChangeListEntity(
     @PrimaryKey
     override val id: Int = 1,
@@ -14,7 +14,7 @@ data class WordChangeListEntity(
 ) : ChangeListEntity
 
 
-@Entity("word")
+@Entity("words")
 data class WordEntity(
     @PrimaryKey
     override val id: Int = -1,

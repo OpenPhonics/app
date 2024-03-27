@@ -9,7 +9,7 @@ import androidx.room.Relation
 import androidx.room.TypeConverter
 import com.advaitvedant.model.LessonState
 
-@Entity("phonetic_lesson_change_list_entity")
+@Entity("phonetic_lesson_change_lists")
 data class PhoneticLessonChangeListEntity(
     @PrimaryKey
     override val id: Int = 1,
@@ -19,7 +19,7 @@ data class PhoneticLessonChangeListEntity(
 ) : ChangeListEntity
 
 
-@Entity("phonetic_lesson")
+@Entity("phonetic_lessons")
 data class PhoneticLessonEntity(
     @PrimaryKey
     override val id: Int = -1,

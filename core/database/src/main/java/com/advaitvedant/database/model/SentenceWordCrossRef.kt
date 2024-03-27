@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 
 @Entity(
-    tableName = "sentence_word_cross_ref",
+    tableName = "sentences_words_cross_ref",
     primaryKeys = ["sentence_id", "word_id"],
     foreignKeys = [
         ForeignKey(

@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.Index
 
 @Entity(
-    tableName = "phonetic_lesson_word_cross_ref",
+    tableName = "phonetic_lessons_words_cross_ref",
     primaryKeys = ["phonetic_lesson_id", "word_id"],
     foreignKeys = [
         ForeignKey(
@@ -36,7 +36,7 @@ data class PhoneticLessonWordCrossRef(
 
 
 @Entity(
-    tableName = "phonetic_lesson_sentence_cross_ref",
+    tableName = "phonetic_lessons_sentences_cross_ref",
     primaryKeys = ["phonetic_lesson_id", "sentence_id"],
     foreignKeys = [
         ForeignKey(
